@@ -1,0 +1,29 @@
+version: "3.7"
+
+services: 
+    database_festival:
+      image: postgres
+      container_name: database_festival
+      restart: always
+      ports: 
+        - 5432:5432
+      environment:
+        - POSTGRES_USER=festival_party
+        - POSTGRES_PASSWORD=festival
+        - POSTGRES_DB=festival_party
+      volumes:
+        - pgdata:/data/postgres
+    app:
+      build: .
+      container_name: festival_party
+      ports:
+        - "3333:3333"
+      volumes:
+        - .:/usr/app
+      links:
+        - database_festival
+      depends_on: 
+        - database_festival
+volumes:
+  pgdata:
+    driver: local
