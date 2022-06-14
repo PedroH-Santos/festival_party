@@ -4,16 +4,12 @@ import { v4 as uuidv4 } from 'uuid'
 
 
 
-@Entity("dress")
-class Dress {
+@Entity("dress_categorys")
+class CategoryDress {
     @PrimaryColumn()
     id: string;
     @Column()
     name: string;
-    @Column()
-    categoryId: string;
-    @Column()
-    price: number;
     @CreateDateColumn()
     createdAt: Date; 
     constructor(){ 
@@ -23,4 +19,4 @@ class Dress {
     }
 } 
 
-export {Dress}
+export {CategoryDress}
