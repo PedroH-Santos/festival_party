@@ -21,6 +21,8 @@ export class CreateDressCategory1655229579510 implements MigrationInterface {
                         type: "timestamp",
                         default: "now()"
                     },
+                    { name: "updatedAt", type: "timestamp", default: "now()" },
+
                 ]
             })
         );

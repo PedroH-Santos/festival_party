@@ -11,12 +11,12 @@ class CreateDressUseCase {
     constructor(
         @inject("DressRepository")
         private dressRepository: IDressRepository
-    ){}
+    ){} 
 
-    async execute({categoryId, name , price}: ICreateDressDTO){
+    async execute({categoryId, name , price,id}: ICreateDressDTO){
 
         await this.dressRepository.create({
-            categoryId, name , price
+            categoryId, name , price,id
         })
 
     }   

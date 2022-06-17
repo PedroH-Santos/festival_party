@@ -5,6 +5,8 @@ import { DressRepository } from '@modules/dress/infra/typeorm/repositories/Dress
 import { IDressRepository } from '@modules/dress/repositories/IDressRepository';
 import { ICategoryDressRepository } from "@modules/dress/repositories/ICategoryDressRepository";
 import { CategoryDressRepository } from "@modules/dress/infra/typeorm/repositories/CategoryDressRepository";
+import { ImageDressRepository } from "@modules/dress/infra/typeorm/repositories/ImageDressRepository";
+import { IImageDressRepository } from "@modules/dress/repositories/IImageDressRepository";
 
 
 container.registerSingleton<IDressRepository>(
@@ -14,4 +16,8 @@ container.registerSingleton<IDressRepository>(
 container.registerSingleton<ICategoryDressRepository>(
     "CategoryDressRepository",
     CategoryDressRepository
+);
+container.registerSingleton<IImageDressRepository>(
+    "ImageDressRepository",
+    ImageDressRepository
 );

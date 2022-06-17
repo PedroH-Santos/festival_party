@@ -13,9 +13,9 @@ class CreateCategoryDressUseCase {
         private categoryDressRepository: ICategoryDressRepository
     ){}
 
-    async execute({name}: ICreateCategoryDressDTO){
+    async execute({name,id}: ICreateCategoryDressDTO){
 
-        await this.categoryDressRepository.create({name});
+        await this.categoryDressRepository.create({name,id});
 
     }   
 }

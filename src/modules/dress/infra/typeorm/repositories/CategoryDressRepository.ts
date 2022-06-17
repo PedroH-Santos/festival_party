@@ -11,11 +11,19 @@ class CategoryDressRepository implements ICategoryDressRepository{
         this.repository = getRepository(CategoryDress);
     }
 
-    async create({name }: ICreateCategoryDressDTO): Promise<CategoryDress> {
-        const dress = this.repository.create({name });
-        await this.repository.save(dress);
-        return dress;
+
+    async create({name,id }: ICreateCategoryDressDTO): Promise<CategoryDress> {
+        const category = this.repository.create({name,id });
+        await this.repository.save(category);
+        return category;
         
+    }
+    async getAll(): Promise<CategoryDress[]>{
+        const categories = await this.repository.find();
+        return categories;
+    }
+    async delete(id: string): Promise<void> {
+        await this.repository.delete(id);
     }
 }
 

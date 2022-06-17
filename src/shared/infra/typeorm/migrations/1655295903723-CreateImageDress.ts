@@ -1,11 +1,11 @@
-import {MigrationInterface, QueryRunner,Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateDress1655231190638 implements MigrationInterface {
+export class CreateImageDress1655295903723 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable( 
+        await queryRunner.createTable(
             new Table({
-                name: "dress",
+                name: "dress_images",
                 columns: [
                     {
                         name: "id",
@@ -13,15 +13,11 @@ export class CreateDress1655231190638 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "name",
+                        name: "image",
                         type: "varchar",
                     },
                     {
-                        name: "price",
-                        type: "numeric"
-                    },
-                    {
-                        name: "categoryId",
+                        name: "idDress",
                         type: "uuid",
                         isNullable: true
                     },
@@ -35,10 +31,10 @@ export class CreateDress1655231190638 implements MigrationInterface {
                 ],
                 foreignKeys: [
                     {
-                        name: "FKDressCategory",
-                        referencedTableName: "dress_categorys",
+                        name: "FKDressImage",
+                        referencedTableName: "dress",
                         referencedColumnNames: ["id"],
-                        columnNames: ["categoryId"],
+                        columnNames: ["idDress"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL"
                     }
@@ -48,7 +44,7 @@ export class CreateDress1655231190638 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("dress");
+        await queryRunner.dropTable("dress_images");
     }
 
 }
