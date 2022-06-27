@@ -14,8 +14,8 @@ class DressRepository implements IDressRepository{
 
 
 
-    async create({categoryId, name , price,id}: ICreateDressDTO): Promise<Dress> {
-        const dress = this.repository.create({categoryId, name , price,id});
+    async create({category_id, name , price,id}: ICreateDressDTO): Promise<Dress> {
+        const dress = this.repository.create({category_id, name , price,id});
         await this.repository.save(dress);
         return dress;
         

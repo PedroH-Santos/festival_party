@@ -14,7 +14,7 @@ const listAllImageDressController = new ListAllImageDressController();
 const deleteImageDressController = new DeleteImageDressController();
 const upload = multer(uploadConfig);
 
-imageDressRouter.post("/:idDress",upload.array("images"),createImagesDressController.handle);
+imageDressRouter.post("/:dress_id",upload.array("images"),createImagesDressController.handle);
 imageDressRouter.get("/",listAllImageDressController.handle);
 imageDressRouter.delete("/:id",deleteImageDressController.handle); 
 

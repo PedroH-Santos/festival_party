@@ -13,10 +13,10 @@ class CreateDressUseCase {
         private dressRepository: IDressRepository
     ){} 
 
-    async execute({categoryId, name , price,id}: ICreateDressDTO){
+    async execute({category_id, name , price,id}: ICreateDressDTO){
 
         await this.dressRepository.create({
-            categoryId, name , price,id
+            category_id, name , price,id
         })
 
     }   

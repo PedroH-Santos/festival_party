@@ -11,13 +11,13 @@ class Dress {
     @Column()
     name: string;
     @Column()
-    categoryId: string;
+    category_id: string;
     @Column()
     price: number;
     @CreateDateColumn()
-    createdAt: Date; 
+    created_at: Date; 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updated_at: Date;
     constructor(){ 
         if(!this.id){
             this.id = uuidv4();

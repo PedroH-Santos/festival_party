@@ -2,7 +2,7 @@
 interface ICreateImageDressDTO {
     id?: string;
     image: string;
-    idDress: string;
+    dress_id: string;
 }
 
  export {ICreateImageDressDTO}

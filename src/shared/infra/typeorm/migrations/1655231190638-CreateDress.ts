@@ -21,16 +21,16 @@ export class CreateDress1655231190638 implements MigrationInterface {
                         type: "numeric"
                     },
                     {
-                        name: "categoryId",
+                        name: "category_id",
                         type: "uuid",
                         isNullable: true
                     },
                     {
-                        name: "createdAt",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()"
                     },
-                    { name: "updatedAt", type: "timestamp", default: "now()" },
+                    { name: "updated_at", type: "timestamp", default: "now()" },
 
                 ],
                 foreignKeys: [
@@ -38,14 +38,14 @@ export class CreateDress1655231190638 implements MigrationInterface {
                         name: "FKDressCategory",
                         referencedTableName: "dress_categorys",
                         referencedColumnNames: ["id"],
-                        columnNames: ["categoryId"],
+                        columnNames: ["category_id"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL"
                     }
                 ]
             })
         )
-    }
+    } 
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable("dress");

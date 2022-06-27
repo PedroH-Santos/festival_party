@@ -7,7 +7,10 @@ import { ICategoryDressRepository } from "@modules/dress/repositories/ICategoryD
 import { CategoryDressRepository } from "@modules/dress/infra/typeorm/repositories/CategoryDressRepository";
 import { ImageDressRepository } from "@modules/dress/infra/typeorm/repositories/ImageDressRepository";
 import { IImageDressRepository } from "@modules/dress/repositories/IImageDressRepository";
-
+import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
+import { IUserRepository } from "@modules/user/repositories/IUserRepository";
+import { DressRentalRepository } from "@modules/rentals/infra/typeorm/repositories/DressRentalRepository";
+import { IDressRentalRepository } from "@modules/rentals/repositories/IDressRentalRepository";
 
 container.registerSingleton<IDressRepository>(
     "DressRepository",
@@ -20,4 +23,13 @@ container.registerSingleton<ICategoryDressRepository>(
 container.registerSingleton<IImageDressRepository>(
     "ImageDressRepository",
     ImageDressRepository
+);
+container.registerSingleton<IUserRepository>(
+    "UserRepository",
+    UserRepository
+);
+
+container.registerSingleton<IDressRentalRepository>(
+    "DressRentalRepository",
+    DressRentalRepository
 );

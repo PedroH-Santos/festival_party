@@ -2,7 +2,7 @@
 interface ICreateDressDTO {
     id?: string,
     name: string,
-    categoryId: string,
+    category_id: string,
     price: number,
 }
 

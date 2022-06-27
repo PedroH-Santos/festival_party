@@ -9,8 +9,8 @@ class ImageDressRepository implements IImageDressRepository {
         this.repository = getRepository(ImageDress);
     }
 
-    async create({ image, idDress }: ICreateImageDressDTO): Promise<ImageDress> {
-       const imageDress = this.repository.create({image,idDress});
+    async create({ image, dress_id }: ICreateImageDressDTO): Promise<ImageDress> {
+       const imageDress = this.repository.create({image,dress_id});
        await this.repository.save(imageDress);
        return imageDress;
 

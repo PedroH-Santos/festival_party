@@ -17,16 +17,16 @@ export class CreateImageDress1655295903723 implements MigrationInterface {
                         type: "varchar",
                     },
                     {
-                        name: "idDress",
+                        name: "dress_id",
                         type: "uuid",
                         isNullable: true
                     },
                     {
-                        name: "createdAt",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()"
                     },
-                    { name: "updatedAt", type: "timestamp", default: "now()" },
+                    { name: "updated_at", type: "timestamp", default: "now()" },
 
                 ],
                 foreignKeys: [
@@ -34,7 +34,7 @@ export class CreateImageDress1655295903723 implements MigrationInterface {
                         name: "FKDressImage",
                         referencedTableName: "dress",
                         referencedColumnNames: ["id"],
-                        columnNames: ["idDress"],
+                        columnNames: ["dress_id"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL"
                     }

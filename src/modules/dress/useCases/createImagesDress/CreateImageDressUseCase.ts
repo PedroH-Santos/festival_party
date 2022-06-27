@@ -5,7 +5,7 @@ import { AppError } from "@shared/Errors/AppError";
 
 
 interface IRequest{
-    idDress: string;
+    dress_id: string;
     imagesName: string[];
 }
 
@@ -22,15 +22,15 @@ class CreateImageDressUseCase {
 
 
 
-    async execute({idDress,imagesName}: IRequest): Promise<void>  { 
+    async execute({dress_id,imagesName}: IRequest): Promise<void>  { 
 
-        const dress = await this.dressRepository.getById(idDress);    
+        const dress = await this.dressRepository.getById(dress_id);    
         if(!dress){
             throw new AppError("Vestido não encontrado !");  
         }
 
         imagesName.map(async (image) => {
-            await this.imageDressRepository.create({idDress,image});
+            await this.imageDressRepository.create({dress_id,image});
         })
     }
  
