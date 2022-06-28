@@ -10,6 +10,7 @@ interface IDressRentalRepository {
     create({id,value, expected_delivery_date, dress_id, user_id,description,start_date}: ICreateDressRentalDTO): Promise<DressRental>;
     getByDate(dress_id: string): Promise<DressRental[]>
     getAll(): Promise<DressRental[]>;
+    delete(id: string): Promise<void>;
 }
 
 
