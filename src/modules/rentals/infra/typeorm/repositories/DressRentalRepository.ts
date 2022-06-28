@@ -33,6 +33,12 @@ class DressRentalRepository implements IDressRentalRepository {
         const rentals = await this.repository.find();
         return rentals;
     }
+    
+    async getById(id: string): Promise<DressRental> {
+        const rental = await this.repository.findOne(id);
+        return rental;
+    }
+
 
     async delete(id: string): Promise<void> {
         await this.repository.delete(id);

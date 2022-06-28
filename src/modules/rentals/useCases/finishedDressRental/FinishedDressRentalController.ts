@@ -1,16 +1,17 @@
 import {Request,Response} from "express";
 import { container } from "tsyringe";
+import { FinishedDressRentalUseCase } from "./FinishedDressRentalUseCase";
 
 
-class DeleteDressRentalController {
+class FinishedDressRentalController {
 
 
     async handle(request: Request, response: Response): Promise<Response> {
         const {id} = request.params;
-        const deleteDressRentalUseCase = container.resolve(DeleteDressRentalUseCase);
-        await deleteDressRentalUseCase.execute(id);
+        const finishedDressRentalController = container.resolve(FinishedDressRentalUseCase);
+        await finishedDressRentalController.execute(id);
         return response.status(201).send();
     }
 }
 
-export {DeleteDressRentalController}
+export {FinishedDressRentalController}
