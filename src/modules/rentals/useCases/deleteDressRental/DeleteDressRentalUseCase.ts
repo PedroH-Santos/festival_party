@@ -12,7 +12,7 @@ class DeleteDressRentalUseCase {
 
     async execute(id: string): Promise<void>{
 
-        await this.dressRentalRepository.delete( id);
+        await this.dressRentalRepository.delete(id);
 
     }
 }

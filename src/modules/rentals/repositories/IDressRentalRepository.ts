@@ -12,6 +12,7 @@ interface IDressRentalRepository {
     getAll(): Promise<DressRental[]>;
     getById(id: string): Promise<DressRental>;
     delete(id: string): Promise<void>;
+    updateFinish(id: string,end_date: Date): Promise<void>;
 
 }
 

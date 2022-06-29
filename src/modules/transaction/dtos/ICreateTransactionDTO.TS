@@ -2,9 +2,10 @@
 
 interface ICreateTransactionDTO {
     id?: string;
-    value: number;
+    value: Number; 
     type: string;
     origin: string;
+    description: string; 
 }
 
 export { ICreateTransactionDTO }

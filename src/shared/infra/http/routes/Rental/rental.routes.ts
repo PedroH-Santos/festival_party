@@ -15,8 +15,8 @@ const finishedDressRentalController = new FinishedDressRentalController();
 
 dressRentalRouter.post("/",createDressRentalController.handle);
 dressRentalRouter.get("/",listDressRentalController.handle);
-dressRentalRouter.delete("/",deleteDressRentalController.handle);
-dressRentalRouter.put("/finished/:id",finishedDressRentalController.handle);
+dressRentalRouter.delete("/:id",deleteDressRentalController.handle);
+dressRentalRouter.patch("/finished/:id",finishedDressRentalController.handle);
 
 
 export {dressRentalRouter}

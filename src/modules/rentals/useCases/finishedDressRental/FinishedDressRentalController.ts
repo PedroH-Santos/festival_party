@@ -8,8 +8,8 @@ class FinishedDressRentalController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const {id} = request.params;
-        const finishedDressRentalController = container.resolve(FinishedDressRentalUseCase);
-        await finishedDressRentalController.execute(id);
+        const finishedDressRentalUseCase = container.resolve(FinishedDressRentalUseCase);
+        await finishedDressRentalUseCase.execute(id);
         return response.status(201).send();
     }
 }

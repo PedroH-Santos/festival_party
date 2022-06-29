@@ -1,4 +1,5 @@
 import {container} from "tsyringe";
+import "./providers";
 
 
 import { DressRepository } from '@modules/dress/infra/typeorm/repositories/DressRepository';
@@ -11,6 +12,8 @@ import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRep
 import { IUserRepository } from "@modules/user/repositories/IUserRepository";
 import { DressRentalRepository } from "@modules/rentals/infra/typeorm/repositories/DressRentalRepository";
 import { IDressRentalRepository } from "@modules/rentals/repositories/IDressRentalRepository";
+import { ITransactionRepository } from "@modules/transaction/repositories/ITransactionRepository";
+import { TransactionRepository } from "@modules/transaction/infra/typeorm/repositories/TransactionRepository";
 
 container.registerSingleton<IDressRepository>(
     "DressRepository",
@@ -32,4 +35,10 @@ container.registerSingleton<IUserRepository>(
 container.registerSingleton<IDressRentalRepository>(
     "DressRentalRepository",
     DressRentalRepository
+);
+
+
+container.registerSingleton<ITransactionRepository>(
+    "TransactionRepository",
+    TransactionRepository
 );

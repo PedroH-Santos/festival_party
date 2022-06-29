@@ -15,6 +15,7 @@ class DressRentalRepository implements IDressRentalRepository {
 
 
 
+
     async create({ id, value, expected_delivery_date, dress_id, user_id, description, start_date }: ICreateDressRentalDTO): Promise<DressRental> {
         const user = this.repository.create({ id, value, expected_delivery_date, dress_id, user_id, description, start_date });
         await this.repository.save(user);
@@ -42,6 +43,16 @@ class DressRentalRepository implements IDressRentalRepository {
 
     async delete(id: string): Promise<void> {
         await this.repository.delete(id);
+    }
+
+    async updateFinish(id: string,end_date: Date): Promise<void> {
+        await this.repository
+            .createQueryBuilder()
+            .update()
+            .set({ end_date })
+            .where("id = :id")
+            .setParameters({ id })
+            .execute();
     }
 
 }
