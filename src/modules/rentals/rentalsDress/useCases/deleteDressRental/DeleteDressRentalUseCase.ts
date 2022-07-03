@@ -1,4 +1,4 @@
-import { IDressRentalRepository } from "@modules/rentals/repositories/IDressRentalRepository";
+import { IDressRentalRepository } from "@modules/rentals/rentalsDress/repositories/IDressRentalRepository";
 import { inject, injectable } from "tsyringe";
 
 @injectable()

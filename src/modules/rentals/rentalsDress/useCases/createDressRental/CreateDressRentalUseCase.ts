@@ -1,10 +1,9 @@
 import { ICreateDressRentalDTO } from "../../dtos/ICreateDressRentalDTO";
-import { IDressRepository } from "../../../dress/repositories/IDressRepository";
-import { IUserRepository } from "../../../user/repositories/IUserRepository";
+import { IDressRepository } from "../../../../dress/repositories/IDressRepository";
+import { IUserRepository } from "../../../../user/repositories/IUserRepository";
 
 import { IDressRentalRepository } from "../../repositories/IDressRentalRepository";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "@shared/Errors/AppError";
 
 
  

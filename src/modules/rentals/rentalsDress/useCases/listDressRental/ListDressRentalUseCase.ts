@@ -1,5 +1,5 @@
-import { DressRental } from "@modules/rentals/infra/typeorm/entities/DressRental";
-import { IDressRentalRepository } from "@modules/rentals/repositories/IDressRentalRepository";
+import { DressRental } from "@modules/rentals/rentalsDress/infra/typeorm/entities/DressRental";
+import { IDressRentalRepository } from "@modules/rentals/rentalsDress/repositories/IDressRentalRepository";
 import { inject, injectable } from "tsyringe";
 
 

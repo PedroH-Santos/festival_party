@@ -10,10 +10,18 @@ import { ImageDressRepository } from "@modules/dress/infra/typeorm/repositories/
 import { IImageDressRepository } from "@modules/dress/repositories/IImageDressRepository";
 import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
 import { IUserRepository } from "@modules/user/repositories/IUserRepository";
-import { DressRentalRepository } from "@modules/rentals/infra/typeorm/repositories/DressRentalRepository";
-import { IDressRentalRepository } from "@modules/rentals/repositories/IDressRentalRepository";
+import { DressRentalRepository } from "@modules/rentals/rentalsDress/infra/typeorm/repositories/DressRentalRepository";
+import { IDressRentalRepository } from "@modules/rentals/rentalsDress/repositories/IDressRentalRepository";
 import { ITransactionRepository } from "@modules/transaction/repositories/ITransactionRepository";
 import { TransactionRepository } from "@modules/transaction/infra/typeorm/repositories/TransactionRepository";
+
+
+import { AccessoryRepository } from '@modules/accessory/infra/typeorm/repositories/AccessoryRepository';
+import { IAccessoryRepository } from '@modules/accessory/repositories/IAccessoryRepository';
+import { ICategoryAccessoryRepository } from "@modules/accessory/repositories/ICategoryAccessoryRepository";
+import { CategoryAccessoryRepository } from "@modules/accessory/infra/typeorm/repositories/CategoryAccessoryRepository";
+import { ImageAccessoryRepository } from "@modules/accessory/infra/typeorm/repositories/ImageAccessoryRepository";
+import { IImageAccessoryRepository } from "@modules/accessory/repositories/IImageAccessoryRepository";
 
 container.registerSingleton<IDressRepository>(
     "DressRepository",
@@ -41,4 +49,19 @@ container.registerSingleton<IDressRentalRepository>(
 container.registerSingleton<ITransactionRepository>(
     "TransactionRepository",
     TransactionRepository
+);
+
+
+
+container.registerSingleton<IAccessoryRepository>(
+    "AccessoryRepository",
+    AccessoryRepository 
+);
+container.registerSingleton<ICategoryAccessoryRepository>(
+    "CategoryAccessoryRepository",
+    CategoryAccessoryRepository
+);
+container.registerSingleton<IImageAccessoryRepository>(
+    "ImageAccessoryRepository",
+    ImageAccessoryRepository
 );

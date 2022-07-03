@@ -4,7 +4,7 @@ import { container } from "tsyringe";
 import { CreateDressRentalUseCase } from "./CreateDressRentalUseCase";
 
 
-class CreateDressRentalController {
+class CreateDressRentalController { 
 
 
     async handle(request: Request, response: Response): Promise<Response> {
@@ -13,6 +13,6 @@ class CreateDressRentalController {
         await createDressRentalUseCase.execute({id,value, expected_delivery_date, dress_id, user_id,description,start_date});
         return response.status(201).send();
     }
-}
+} 
 
 export {CreateDressRentalController}

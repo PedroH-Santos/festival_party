@@ -1,7 +1,7 @@
-import { IDressRentalRepository } from "@modules/rentals/repositories/IDressRentalRepository";
+import { IDressRentalRepository } from "@modules/rentals/rentalsDress/repositories/IDressRentalRepository";
 import { ICreateTransactionDTO } from "@modules/transaction/dtos/ICreateTransactionDTO";
 import { ITransactionRepository } from "@modules/transaction/repositories/ITransactionRepository";
-import { IDateProvider } from "../../../../shared/containers/providers/DateProvider/IDateProvider";
+import { IDateProvider } from "@shared/containers/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/Errors/AppError";
 import { inject, injectable } from "tsyringe";
 
