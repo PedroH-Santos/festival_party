@@ -15,7 +15,7 @@ class ImageDress {
     @ManyToOne(() => Dress, dress => dress.images )
     @JoinColumn({name: "dress_id"})
     dress: Dress;
-
+ 
     @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()
