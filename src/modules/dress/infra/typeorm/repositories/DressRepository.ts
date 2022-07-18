@@ -22,7 +22,9 @@ class DressRepository implements IDressRepository{
     }
 
     async getAll(): Promise<Dress[]>{
-        const dresses = await this.repository.find();
+        const dresses = await this.repository.find({
+            relations: ["category","images"]
+        });
         return dresses;
     }
     async getById(id: string): Promise<Dress> {
