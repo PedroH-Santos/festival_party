@@ -7,7 +7,7 @@ import { Dress } from "../entities/Dress";
 
 
 class DressRepository implements IDressRepository{
-    private repository: Repository<Dress>;
+    private repository: Repository<Dress>; 
     constructor(){
         this.repository = getRepository(Dress);
     }
@@ -28,7 +28,10 @@ class DressRepository implements IDressRepository{
         return dresses;
     }
     async getById(id: string): Promise<Dress> {
-        const dress = await this.repository.findOne(id);
+        const dress = await this.repository.findOne(id,{
+            relations: ["category","images"]
+
+        });
         return dress;
     }
     async delete(id: string): Promise<void> {

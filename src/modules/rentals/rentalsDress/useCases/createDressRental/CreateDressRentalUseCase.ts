@@ -4,6 +4,7 @@ import { IUserRepository } from "../../../../user/repositories/IUserRepository";
 
 import { IDressRentalRepository } from "../../repositories/IDressRentalRepository";
 import { inject, injectable } from "tsyringe";
+import { AppError } from "@shared/Errors/AppError";
 
 
  
@@ -37,11 +38,11 @@ class CreateDressRentalUseCase {
         }
 
 
-        const existRentalInDate = this.dressRentalRepository.getByDate(dress_id);
+        const existRentalInDate = this.dressRentalRepository.getByDate(dress_id,start_date);
         if ((await existRentalInDate).length > 0) {
             throw new AppError("Vestido já está alugado!");
 
-        } 
+        }  
 
 
         await this.dressRentalRepository.create({ id, value, expected_delivery_date, dress_id, user_id, description,start_date });
