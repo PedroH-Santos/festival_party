@@ -15,10 +15,13 @@ class CreateDressUseCase {
 
     async execute({category_id, name , price,id}: ICreateDressDTO){
 
-        await this.dressRepository.create({
+        const dress = await this.dressRepository.create({
             category_id, name , price,id
         })
+        return dress;
 
     }   
 }
 export { CreateDressUseCase }; 
+
+

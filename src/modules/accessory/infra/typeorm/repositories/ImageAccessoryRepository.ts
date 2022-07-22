@@ -6,14 +6,20 @@ import { ImageAccessory } from "../entities/ImageAccessory";
 
 class ImageAccessoryRepository implements IImageAccessoryRepository {
     private repository: Repository<ImageAccessory>;
-    constructor(){
+    constructor() {
         this.repository = getRepository(ImageAccessory);
+    }
+    getByIdAccessory(accessory_id: string): Promise<ImageAccessory> {
+        const imagesAccessory = this.repository.findOne({
+            where: { accessory_id }
+        });
+        return imagesAccessory;
     }
 
     async create({ image, accessory_id }: ICreateImageAccessoryDTO): Promise<ImageAccessory> {
-       const imageAccessory = this.repository.create({image,accessory_id});
-       await this.repository.save(imageAccessory);
-       return imageAccessory;
+        const imageAccessory = this.repository.create({ image, accessory_id });
+        await this.repository.save(imageAccessory);
+        return imageAccessory;
 
     }
     async getAll(): Promise<ImageAccessory[]> {

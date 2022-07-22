@@ -6,7 +6,7 @@ interface IFiles {
     filename: string;
 }
 
-class CreateImagesAccessoryController {
+class CreateImageAccessoryController {
 
     async handle(request: Request, response: Response): Promise<Response> {
             const {accessory_id} = request.params;
@@ -19,4 +19,4 @@ class CreateImagesAccessoryController {
 
 }
 
-export {CreateImagesAccessoryController}
+export {CreateImageAccessoryController}

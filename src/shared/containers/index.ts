@@ -22,6 +22,8 @@ import { ICategoryAccessoryRepository } from "@modules/accessory/repositories/IC
 import { CategoryAccessoryRepository } from "@modules/accessory/infra/typeorm/repositories/CategoryAccessoryRepository";
 import { ImageAccessoryRepository } from "@modules/accessory/infra/typeorm/repositories/ImageAccessoryRepository";
 import { IImageAccessoryRepository } from "@modules/accessory/repositories/IImageAccessoryRepository";
+import { IAccessoryRentalRepository } from "@modules/rentals/rentalsAccessory/repositories/IAccessoryRentalRepository";
+import { AccessoryRentalRepository } from "@modules/rentals/rentalsAccessory/infra/typeorm/repositories/AccessoryRentalRepository";
 
 container.registerSingleton<IDressRepository>(
     "DressRepository",
@@ -64,4 +66,8 @@ container.registerSingleton<ICategoryAccessoryRepository>(
 container.registerSingleton<IImageAccessoryRepository>(
     "ImageAccessoryRepository",
     ImageAccessoryRepository
+);
+container.registerSingleton<IAccessoryRentalRepository>(
+    "AccessoryRentalRepository",
+    AccessoryRentalRepository
 );

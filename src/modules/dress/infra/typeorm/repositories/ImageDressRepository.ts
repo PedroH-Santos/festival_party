@@ -15,6 +15,15 @@ class ImageDressRepository implements IImageDressRepository {
        return imageDress;
 
     }
+
+    async getByIdDress(dress_id: string): Promise<ImageDress>{
+        const imagesDress = this.repository.findOne({
+            where: { dress_id}
+        });
+        return imagesDress;
+
+    }
+
     async getAll(): Promise<ImageDress[]> {
         const imagesDress = this.repository.find();
         return imagesDress;

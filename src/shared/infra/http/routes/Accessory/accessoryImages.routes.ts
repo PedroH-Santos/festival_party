@@ -1,5 +1,5 @@
 
-import { CreateImagesAccessoryController } from '../../../../../modules/accessory/useCases/createImagesAccessory/CreateImagesAccessoryController';
+import { CreateImageAccessoryController } from '../../../../../modules/accessory/useCases/createImageAccessory/CreateImageAccessoryController';
 import { DeleteImageAccessoryController } from '../../../../../modules/accessory/useCases/deleteImageAccessory/DeleteImageAccessoryController';
 import { ListAllImageAccessoryController } from '../../../../../modules/accessory/useCases/listImageAccessory/ListAllImageAccessoryController';
 
@@ -10,12 +10,12 @@ import multer from "multer";
 
 const imageAccessoryRouter = Router();
 
-const createImagesAccessoryController = new CreateImagesAccessoryController();
+const createImagesAccessoryController = new CreateImageAccessoryController();
 const listAllImageAccessoryController = new ListAllImageAccessoryController(); 
 const deleteImageAccessoryController = new DeleteImageAccessoryController();
 const upload = multer(uploadConfig);
 
-imageAccessoryRouter.post("/:Accessory_id",upload.array("images"),createImagesAccessoryController.handle);
+imageAccessoryRouter.post("/:accessory_id",upload.array("images"),createImagesAccessoryController.handle);
 imageAccessoryRouter.get("/",listAllImageAccessoryController.handle);
 imageAccessoryRouter.delete("/:id",deleteImageAccessoryController.handle); 
  

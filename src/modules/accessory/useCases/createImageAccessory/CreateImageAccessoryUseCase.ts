@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 import { IImageAccessoryRepository } from "@modules/accessory/repositories/IImageAccessoryRepository";
 import { IAccessoryRepository } from "@modules/accessory/repositories/IAccessoryRepository";
 import { AppError } from "@shared/Errors/AppError";
+import { IStorageProvider } from "@shared/containers/providers/StorageProvider/IStorageProvider";
 
 
 interface IRequest{
@@ -20,6 +21,8 @@ class CreateImageAccessoryUseCase {
         private imageAccessoryRepository: IImageAccessoryRepository,
         @inject("AccessoryRepository")
         private accessoryRepository: IAccessoryRepository,
+        @inject("StorageProvider")
+        private storageProvider: IStorageProvider,
     ){}
 
 
@@ -30,8 +33,13 @@ class CreateImageAccessoryUseCase {
         if(!accessory){
             throw new AppError("Accessório não encontrado !");  
         }
-
+        const imageExist = await this.imageAccessoryRepository.getByIdAccessory(accessory_id);
+        if(imageExist){
+            await this.imageAccessoryRepository.delete(imageExist.id);
+            await this.storageProvider.delete(imageExist.image,"accessory");
+        }    
         imagesName.map(async (image) => {
+            await this.storageProvider.save(image,'accessory');
             await this.imageAccessoryRepository.create({accessory_id,image});
         })
     }

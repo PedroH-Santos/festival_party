@@ -22,11 +22,15 @@ class AccessoryRepository implements IAccessoryRepository{
     }
 
     async getAll(): Promise<Accessory[]>{
-        const accessorys = await this.repository.find();
+        const accessorys = await this.repository.find({
+            relations: ["category","images"]
+        });
         return accessorys;
     }
     async getById(id: string): Promise<Accessory> {
-        const accessory = await this.repository.findOne(id);
+        const accessory = await this.repository.findOne(id,{
+            relations: ["category","images"]
+        });
         return accessory;
     }
     async delete(id: string): Promise<void> {
