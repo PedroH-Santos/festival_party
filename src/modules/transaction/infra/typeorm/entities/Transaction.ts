@@ -11,7 +11,7 @@ class Transaction {
     @Column()
     description: string;
     @Column()
-    value: number;
+    value: Number;
     @Column()
     type: string;
     @Column()
