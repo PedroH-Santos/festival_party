@@ -8,9 +8,9 @@ class CreateDressRentalController {
 
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const {id,value, expected_delivery_date, dress_id, user_id,description,start_date} = request.body;
+        const {id,value, expected_delivery_date, dress_id, user_id,client_id,description,start_date} = request.body;
         const createDressRentalUseCase = container.resolve(CreateDressRentalUseCase);
-        await createDressRentalUseCase.execute({id,value, expected_delivery_date, dress_id, user_id,description,start_date});
+        await createDressRentalUseCase.execute({id,value, expected_delivery_date, dress_id, user_id,description,start_date,client_id});
         return response.status(201).send();
     }
 } 

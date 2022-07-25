@@ -7,7 +7,7 @@ import { AccessoryRental } from "../infra/typeorm/entities/AccessoryRental";
 
 
 interface IAccessoryRentalRepository {
-    create({id,value, expected_delivery_date, accessory_id, user_id,description,start_date}: ICreateAccessoryRentalDTO): Promise<AccessoryRental>;
+    create({id,value, expected_delivery_date, accessory_id, user_id,description,start_date,client_id}: ICreateAccessoryRentalDTO): Promise<AccessoryRental>;
     getByDate(accessory_id: string,start_date: Date): Promise<AccessoryRental[]>
     getAll(): Promise<AccessoryRental[]>;
     getById(id: string): Promise<AccessoryRental>;

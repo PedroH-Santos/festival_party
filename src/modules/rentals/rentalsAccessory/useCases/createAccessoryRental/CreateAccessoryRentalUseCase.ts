@@ -5,6 +5,7 @@ import { IAccessoryRentalRepository } from "../../repositories/IAccessoryRentalR
 import { inject, injectable } from "tsyringe";
 import { AppError } from "@shared/Errors/AppError";
 import { IAccessoryRepository } from "@modules/accessory/repositories/IAccessoryRepository";
+import { IClientRepository } from "@modules/client/repositories/IClientRepository";
 
 
  
@@ -20,9 +21,11 @@ class CreateAccessoryRentalUseCase {
         private accessoryRepository: IAccessoryRepository,
         @inject("UserRepository")
         private userRepository: IUserRepository,
+        @inject("ClientRepository") 
+        private clientRepository: IClientRepository,
     ) { }
 
-    async execute({ id, value, expected_delivery_date, accessory_id, user_id, description,start_date }: ICreateAccessoryRentalDTO) {
+    async execute({ id, value, expected_delivery_date, accessory_id, user_id, description,start_date,client_id }: ICreateAccessoryRentalDTO) {
 
 
 
@@ -38,6 +41,13 @@ class CreateAccessoryRentalUseCase {
         }
 
 
+        const client = await this.clientRepository.getById(client_id);
+
+        if (!client) {
+            throw new AppError("Cliente não encontrado!");
+        }
+
+
         const existRentalInDate = this.accessoryRentalRepository.getByDate(accessory_id,start_date);
         if ((await existRentalInDate).length > 0) {
             throw new AppError("Accessório já está alugado!");
@@ -45,7 +55,7 @@ class CreateAccessoryRentalUseCase {
         }  
 
 
-        await this.accessoryRentalRepository.create({ id, value, expected_delivery_date, accessory_id, user_id, description,start_date });
+        await this.accessoryRentalRepository.create({ id, value, expected_delivery_date, accessory_id, user_id, description,start_date,client_id });
 
     }
 }

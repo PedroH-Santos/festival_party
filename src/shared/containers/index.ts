@@ -24,6 +24,8 @@ import { ImageAccessoryRepository } from "@modules/accessory/infra/typeorm/repos
 import { IImageAccessoryRepository } from "@modules/accessory/repositories/IImageAccessoryRepository";
 import { IAccessoryRentalRepository } from "@modules/rentals/rentalsAccessory/repositories/IAccessoryRentalRepository";
 import { AccessoryRentalRepository } from "@modules/rentals/rentalsAccessory/infra/typeorm/repositories/AccessoryRentalRepository";
+import { IClientRepository } from "@modules/client/repositories/IClientRepository";
+import { ClientRepository } from "@modules/client/infra/typeorm/repositories/ClientRepository";
 
 container.registerSingleton<IDressRepository>(
     "DressRepository",
@@ -70,4 +72,8 @@ container.registerSingleton<IImageAccessoryRepository>(
 container.registerSingleton<IAccessoryRentalRepository>(
     "AccessoryRentalRepository",
     AccessoryRentalRepository
+);
+container.registerSingleton<IClientRepository>(
+    "ClientRepository",
+    ClientRepository
 );

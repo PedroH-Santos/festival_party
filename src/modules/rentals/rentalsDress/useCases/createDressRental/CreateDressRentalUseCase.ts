@@ -5,6 +5,7 @@ import { IUserRepository } from "../../../../user/repositories/IUserRepository";
 import { IDressRentalRepository } from "../../repositories/IDressRentalRepository";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "@shared/Errors/AppError";
+import { IClientRepository } from "@modules/client/repositories/IClientRepository";
 
 
  
@@ -18,12 +19,13 @@ class CreateDressRentalUseCase {
         private dressRentalRepository: IDressRentalRepository,
         @inject("DressRepository")
         private dressRepository: IDressRepository,
+        @inject("ClientRepository") 
+        private clientRepository: IClientRepository,
         @inject("UserRepository")
         private userRepository: IUserRepository,
     ) { }
 
-    async execute({ id, value, expected_delivery_date, dress_id, user_id, description,start_date }: ICreateDressRentalDTO) {
-
+    async execute({ id, value, expected_delivery_date, dress_id, user_id, description,start_date,client_id }: ICreateDressRentalDTO) {
 
 
         const user = await this.userRepository.getById(user_id);
@@ -37,6 +39,11 @@ class CreateDressRentalUseCase {
             throw new AppError("Vestido não encontrado!");
         }
 
+        const client = await this.clientRepository.getById(client_id);
+
+        if (!client) {
+            throw new AppError("Cliente não encontrado!");
+        }
 
         const existRentalInDate = this.dressRentalRepository.getByDate(dress_id,start_date);
         if ((await existRentalInDate).length > 0) {
@@ -45,7 +52,7 @@ class CreateDressRentalUseCase {
         }  
 
 
-        await this.dressRentalRepository.create({ id, value, expected_delivery_date, dress_id, user_id, description,start_date });
+        await this.dressRentalRepository.create({ id, value, expected_delivery_date, dress_id, user_id, description,start_date,client_id });
 
     }
 }

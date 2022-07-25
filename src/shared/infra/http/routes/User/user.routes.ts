@@ -7,7 +7,7 @@ import { FindUserByIdController } from "@modules/user/useCases/findUserById/Find
 
 import {Router} from  "express";
 
-
+ 
 const userRouter = Router();
 
 const createUserController = new CreateUserController();

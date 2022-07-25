@@ -1,4 +1,6 @@
 
+import { Accessory } from '@modules/accessory/infra/typeorm/entities/Accessory';
+import { Client } from '@modules/client/infra/typeorm/entities/Client';
 import { User } from '@modules/user/infra/typeorm/entities/User';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid';
@@ -26,12 +28,23 @@ class AccessoryRental {
     updated_at: Date;
     @Column()
     accessory_id: string;
+
+    @ManyToOne(() => Accessory)
+    @JoinColumn({name: "accessory_id"})
+    product: Accessory;
+
     @Column()
     user_id: string;
 
     @ManyToOne(() => User)
     @JoinColumn({name: "user_id"})
     user: User;
+
+    @Column()
+    client_id: string;
+    @ManyToOne(() => Client)
+    @JoinColumn({name: "client_id"})
+    client: Client;
     constructor() {
         if (!this.id) {
             this.id = uuidV4();

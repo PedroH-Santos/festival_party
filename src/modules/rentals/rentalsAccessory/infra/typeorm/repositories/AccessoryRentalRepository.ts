@@ -17,10 +17,10 @@ class AccessoryRentalRepository implements IAccessoryRentalRepository {
 
 
 
-    async create({ id, value, expected_delivery_date, accessory_id, user_id, description, start_date }: ICreateAccessoryRentalDTO): Promise<AccessoryRental> {
-        const user = this.repository.create({ id, value, expected_delivery_date, accessory_id, user_id, description, start_date });
-        await this.repository.save(user);
-        return user;
+    async create({ id, value, expected_delivery_date, accessory_id, user_id, description, start_date,client_id }: ICreateAccessoryRentalDTO): Promise<AccessoryRental> {
+        const rental = this.repository.create({ id, value, expected_delivery_date, accessory_id, user_id, description, start_date,client_id });
+        await this.repository.save(rental);
+        return rental;
     }
 
 
@@ -33,17 +33,22 @@ class AccessoryRentalRepository implements IAccessoryRentalRepository {
         return rentals;
     }
     async getAll(): Promise<AccessoryRental[]> {
-        const rentals = await this.repository.find();
+        const rentals = await this.repository.find({
+            relations: ['user','product','client'],
+        });
         return rentals;
     }
 
     async getById(id: string): Promise<AccessoryRental> {
-        const rental = await this.repository.findOne(id);
+        const rental = await this.repository.findOne({
+            relations: ['user','product','client'],
+            where: { id }
+        });
         return rental;
     }
     async getByAccessoryId(accessory_id: string): Promise<AccessoryRental[]> {
         const rental = await this.repository.find({
-            relations: ['user'],
+            relations: ['user','product','client'],
             where: { accessory_id }
         });
         return rental;

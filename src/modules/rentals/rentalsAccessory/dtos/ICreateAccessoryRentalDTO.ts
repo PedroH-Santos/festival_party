@@ -11,6 +11,7 @@ interface ICreateAccessoryRentalDTO {
     accessory_id: string;
     user_id: string;
     start_date: Date;
+    client_id: string;
 
 }
 
