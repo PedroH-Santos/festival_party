@@ -34,21 +34,21 @@ class AccessoryRentalRepository implements IAccessoryRentalRepository {
     }
     async getAll(): Promise<AccessoryRental[]> {
         const rentals = await this.repository.find({
-            relations: ['user','product','client'],
+            relations: ['user','product','client','product.category','product.images'],
         });
         return rentals;
     }
 
     async getById(id: string): Promise<AccessoryRental> {
         const rental = await this.repository.findOne({
-            relations: ['user','product','client'],
+            relations: ['user','product','client','product.category','product.images'],
             where: { id }
         });
         return rental;
     }
     async getByAccessoryId(accessory_id: string): Promise<AccessoryRental[]> {
         const rental = await this.repository.find({
-            relations: ['user','product','client'],
+            relations: ['user','product','client','product.category','product.images'],
             where: { accessory_id }
         });
         return rental;
