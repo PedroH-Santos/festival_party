@@ -8,24 +8,17 @@ import { inject, injectable } from "tsyringe";
 @injectable()
 class CreateClientUseCase {
     constructor(
-        @inject("ClientRepository") 
+        @inject("ClientRepository")
         private clientRepository: IClientRepository
-    ){}
-    
+    ) { }
 
-    async execute({id,name,email,phone}: ICreateClientDTO): Promise<Client> {
 
-        const clientExist = await this.clientRepository.getByEmail(email);
+    async execute({ id, name, email, phone }: ICreateClientDTO): Promise<Client> {
 
-        if(!clientExist && !id){
-            const client = await this.clientRepository.create({id,name,email,phone});
-            return client;
-        }
-        console.log(clientExist);
-        return clientExist;
-
+        const client = await this.clientRepository.create({ id, name, email, phone });
+        return client;
     }
 }
 
 
-export {CreateClientUseCase}
+export { CreateClientUseCase }

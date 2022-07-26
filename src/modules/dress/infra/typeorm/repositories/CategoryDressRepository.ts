@@ -18,6 +18,10 @@ class CategoryDressRepository implements ICategoryDressRepository{
         return category;
         
     }
+    async getById(id: string): Promise<CategoryDress> {
+        const category = await this.repository.findOne(id);
+        return category;
+    } 
     async getAll(): Promise<CategoryDress[]>{
         const categories = await this.repository.find();
         return categories;

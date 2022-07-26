@@ -23,6 +23,10 @@ class CategoryAccessoryRepository implements ICategoryAccessoryRepository{
         const categories = await this.repository.find();
         return categories;
     }
+    async getById(id: string): Promise<CategoryAccessory> {
+        const category = await this.repository.findOne(id);
+        return category;
+    } 
     async delete(id: string): Promise<void> {
         await this.repository.delete(id);
     }

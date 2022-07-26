@@ -46,7 +46,7 @@ class CreateDressRentalUseCase {
         }
 
         const existRentalInDate = this.dressRentalRepository.getByDate(dress_id,start_date);
-        if ((await existRentalInDate).length > 0) {
+        if ((await existRentalInDate).length > 0 && !id) {
             throw new AppError("Vestido já está alugado!");
 
         }  
