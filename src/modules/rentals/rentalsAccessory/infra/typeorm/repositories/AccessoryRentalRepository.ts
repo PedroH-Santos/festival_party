@@ -32,6 +32,7 @@ class AccessoryRentalRepository implements IAccessoryRentalRepository {
         const rentals = await rentalQuery.getMany();
         return rentals;
     }
+    
     async getAll(): Promise<AccessoryRental[]> {
         const rentals = await this.repository.find({
             relations: ['user','product','client','product.category','product.images'],
@@ -45,6 +46,30 @@ class AccessoryRentalRepository implements IAccessoryRentalRepository {
             where: { id }
         });
         return rental;
+    }
+
+    async getAllToday(): Promise<AccessoryRental[]> {
+        const rentalQuery = await this.repository.createQueryBuilder("rentals");
+        rentalQuery.leftJoinAndSelect("rentals.user","users");
+        rentalQuery.leftJoinAndSelect("rentals.product","accessory");
+        rentalQuery.leftJoinAndSelect("accessory.images","accessory_images");
+        rentalQuery.leftJoinAndSelect("rentals.client","clients");
+        rentalQuery.andWhere("start_date::date =  NOW()::date");
+        const rentals = await rentalQuery.getMany();
+
+        return rentals;
+    }
+
+    async getAllFinishToday(): Promise<AccessoryRental[]> {
+        const rentalQuery = await this.repository.createQueryBuilder("rentals");
+        rentalQuery.leftJoinAndSelect("rentals.user","users");
+        rentalQuery.leftJoinAndSelect("rentals.product","accessory");
+        rentalQuery.leftJoinAndSelect("accessory.images","accessory_images");
+        rentalQuery.leftJoinAndSelect("rentals.client","clients");
+        rentalQuery.andWhere("expected_delivery_date::date <=  NOW()::date");
+        const rentals = await rentalQuery.getMany();
+
+        return rentals;
     }
     async getByAccessoryId(accessory_id: string): Promise<AccessoryRental[]> {
         const rental = await this.repository.find({

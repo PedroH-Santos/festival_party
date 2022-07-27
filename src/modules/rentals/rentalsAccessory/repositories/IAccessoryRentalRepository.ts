@@ -11,6 +11,8 @@ interface IAccessoryRentalRepository {
     getByDate(accessory_id: string,start_date: Date): Promise<AccessoryRental[]>
     getAll(): Promise<AccessoryRental[]>;
     getById(id: string): Promise<AccessoryRental>;
+    getAllToday(): Promise<AccessoryRental[]>;
+    getAllFinishToday(): Promise<AccessoryRental[]>;
     getByAccessoryId(accessory_id: string): Promise<AccessoryRental[]>;
     delete(id: string): Promise<void>;
     updateFinish(id: string,end_date: Date): Promise<void>;
