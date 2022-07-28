@@ -1,6 +1,6 @@
 import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
 import { IUserRepository } from "@modules/user/repositories/IUserRepository";
-import { Repository, getRepository } from "typeorm"; 
+import { Repository, getRepository } from "typeorm";
 
 import { User } from "../entities/User";
 
@@ -9,12 +9,12 @@ import { User } from "../entities/User";
 
 class UserRepository implements IUserRepository {
     private repository: Repository<User>
-    constructor(){
+    constructor() {
         this.repository = getRepository(User);
     }
-    
-    async create({ id, name, email,password }: ICreateUserDTO): Promise<User> {
-        const user = this.repository.create({ id, name, email,password});    
+
+    async create({ id, name, email, password }: ICreateUserDTO): Promise<User> {
+        const user = this.repository.create({ id, name, email, password });
         await this.repository.save(user);
         return user;
 
@@ -26,7 +26,11 @@ class UserRepository implements IUserRepository {
     async getById(id: string): Promise<User> {
         const user = await this.repository.findOne(id);
         return user;
-    } 
+    }
+    async getByEmail(email: string): Promise<User> {
+        const user = await this.repository.findOne({email});
+        return user;
+    }
     async delete(id: string): Promise<void> {
         await this.repository.delete(id);
     }
@@ -34,4 +38,4 @@ class UserRepository implements IUserRepository {
 }
 
 
-export {UserRepository}
+export { UserRepository }

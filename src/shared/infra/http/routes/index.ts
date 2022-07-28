@@ -7,6 +7,7 @@ import {allAccessoryRentalRoutes} from "./Rental/RentalAccessory";
 import {allTransactionRoutes} from "./Transaction";
 import { allRouteraccessory } from "./Accessory";
 import { allRouterClient } from "./Client";
+import { allRouterAuthenticate } from "./Authenticate";
 
 const router = Router();
 router.use(allRouterDress);
@@ -16,5 +17,6 @@ router.use(allAccessoryRentalRoutes );
 router.use(allDressRentalRoutes );
 router.use(allTransactionRoutes );
 router.use(allRouterClient );
+router.use(allRouterAuthenticate );
 
 export {router}  

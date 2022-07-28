@@ -1,10 +1,11 @@
 import {Router} from  "express";
+import { ensureAuthenticated } from "../../middlewares/ensureAuthenticated";
 import { clientRouter } from "./client.routes";
 
 
 
 const allRouterClient = Router();
-allRouterClient.use("/client",clientRouter);
+allRouterClient.use("/client",ensureAuthenticated,clientRouter);
 
 
 
