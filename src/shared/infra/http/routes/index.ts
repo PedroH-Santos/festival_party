@@ -1,20 +1,16 @@
 import {Router} from  "express";
-import { allRouterDress } from "./Dress";
 import {allRouterUser} from "./User";
-import {allDressRentalRoutes} from "./Rental/RentalDress";
-import {allAccessoryRentalRoutes} from "./Rental/RentalAccessory";
+import {allRouterProduct} from "./Product";
 
 import {allTransactionRoutes} from "./Transaction";
-import { allRouteraccessory } from "./Accessory";
 import { allRouterClient } from "./Client";
 import { allRouterAuthenticate } from "./Authenticate";
+import {allRentalRoutes} from "./Rental";
 
 const router = Router();
-router.use(allRouterDress);
 router.use(allRouterUser );
-router.use(allRouteraccessory );
-router.use(allAccessoryRentalRoutes );
-router.use(allDressRentalRoutes );
+router.use(allRouterProduct );
+router.use(allRentalRoutes );
 router.use(allTransactionRoutes );
 router.use(allRouterClient );
 router.use(allRouterAuthenticate );

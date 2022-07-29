@@ -6,6 +6,7 @@ interface ICreateTransactionDTO {
     type: string;
     origin: string;
     description: string; 
+    rental_id?: string;
 }
 
 export { ICreateTransactionDTO }

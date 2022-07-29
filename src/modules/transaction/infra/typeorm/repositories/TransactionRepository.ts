@@ -16,8 +16,8 @@ class TransactionRepository implements ITransactionRepository {
 
 
 
-    async create({ id, value, type, origin, description }: ICreateTransactionDTO): Promise<Transaction> {
-        const transaction = this.repository.create({ id, value, type, origin, description  });
+    async create({ id, value, type, origin, description,rental_id }: ICreateTransactionDTO): Promise<Transaction> {
+        const transaction = this.repository.create({ id, value, type, origin, description,rental_id  });
         await this.repository.save(transaction);
         return transaction;
     }
