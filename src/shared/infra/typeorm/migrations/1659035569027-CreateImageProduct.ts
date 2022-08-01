@@ -35,7 +35,7 @@ export class CreateImageProduct1659035569027 implements MigrationInterface {
                         referencedTableName: "products",
                         referencedColumnNames: ["id"],
                         columnNames: ["product_id"],
-                        onDelete: "SET NULL",
+                        onDelete: "CASCADE",
                         onUpdate: "SET NULL"
                     }
                 ]

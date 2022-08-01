@@ -50,7 +50,7 @@ export class CreateTransaction1659098480634 implements MigrationInterface {
                         referencedTableName: "rentals",
                         referencedColumnNames: ["id"],
                         columnNames: ["rental_id"],
-                        onDelete: "SET NULL",
+                        onDelete: "CASCADE",
                         onUpdate: "SET NULL"
                     }
                 ]
