@@ -27,6 +27,15 @@ class UserRepository implements IUserRepository {
         const user = await this.repository.findOne(id);
         return user;
     }
+    async getByEmailWithPassword(email: string): Promise<User> {
+        const user = await this.repository
+        .createQueryBuilder('users')
+        .select()
+        .addSelect('users.password')
+        .where('users.email = :email', {email: email})
+        .getOne();
+        return user;
+    }
     async getByEmail(email: string): Promise<User> {
         const user = await this.repository.findOne({email});
         return user;

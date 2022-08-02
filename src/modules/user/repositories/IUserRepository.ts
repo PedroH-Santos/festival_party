@@ -8,6 +8,7 @@ interface IUserRepository {
     create({id,name,email,password}: ICreateUserDTO): Promise<User>;
     getAll(): Promise<User[]>;
     getByEmail(email: string): Promise<User>;
+    getByEmailWithPassword(email: string): Promise<User>;
     getById(id: string): Promise<User>;
     delete(id: string): Promise<void>;
 }

@@ -32,7 +32,7 @@ class AuthenticateUserUseCase {
 
     
     async execute({email,password}: IRequest) : Promise<IResponse>{
-        const user = await this.userRepository.getByEmail(email);
+        const user = await this.userRepository.getByEmailWithPassword(email);
         const {secret_token,expires_in_token} = auth;
         if(!user) {
             throw new AppError("Email ou senha incorretos!");

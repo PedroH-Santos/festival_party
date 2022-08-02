@@ -9,7 +9,8 @@ class User {
     id: string;
     @Column()
     name: string;
-    @Column()
+    
+    @Column({select: false})
     password: string;
     @Column()
     email: string;
