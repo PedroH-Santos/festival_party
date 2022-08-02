@@ -3,12 +3,13 @@ import  express,{ NextFunction, Request,Response} from "express";
 import "express-async-errors";
 import { router } from "./routes";
 
-import "@shared/infra/typeorm";
+import  createConnection  from "@shared/infra/typeorm";  
 import "@shared/containers";
 import { AppError } from "@shared/Errors/AppError";
 import cors from "cors";
 
 const app = express();
+createConnection();
 
  
 app.use(express.json())
