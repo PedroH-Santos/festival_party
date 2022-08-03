@@ -1,4 +1,4 @@
-import { ImageProduct } from "@modules/Product/infra/typeorm/entities/ImageProduct";
+import { ImageProduct } from "@modules/product/infra/typeorm/entities/ImageProduct";
 import { IImageProductRepository } from "@modules/product/repositories/IImageProductRepository";
 import { inject, injectable } from "tsyringe";
 

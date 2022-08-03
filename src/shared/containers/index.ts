@@ -12,8 +12,8 @@ import { TransactionRepository } from "@modules/transaction/infra/typeorm/reposi
 import { IClientRepository } from "@modules/client/repositories/IClientRepository";
 import { ClientRepository } from "@modules/client/infra/typeorm/repositories/ClientRepository";
 import { IImageProductRepository } from "@modules/product/repositories/IImageProductRepository";
-import { IProductRepository } from "@modules/Product/repositories/IProductRepository";
-import { ICategoryProductRepository } from "@modules/Product/repositories/ICategoryProductRepository";
+import { IProductRepository } from "@modules/product/repositories/IProductRepository";
+import { ICategoryProductRepository } from "@modules/product/repositories/ICategoryProductRepository";
 import { ProductRepository } from "@modules/product/infra/typeorm/repositories/ProductRepository";
 import { CategoryProductRepository } from "@modules/product/infra/typeorm/repositories/CategoryProductRepository";
 import { ImageProductRepository } from "@modules/product/infra/typeorm/repositories/ImageProductRepository";

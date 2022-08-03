@@ -1,5 +1,5 @@
-import { CategoryProduct } from "@modules/Product/infra/typeorm/entities/CategoryProduct";
-import { ICategoryProductRepository } from "@modules/Product/repositories/ICategoryProductRepository";
+import { CategoryProduct } from "@modules/product/infra/typeorm/entities/CategoryProduct";
+import { ICategoryProductRepository } from "@modules/product/repositories/ICategoryProductRepository";
 import { inject, injectable } from "tsyringe" 
 
 

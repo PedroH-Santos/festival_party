@@ -1,6 +1,6 @@
 
-import { CategoryProduct } from "@modules/Product/infra/typeorm/entities/CategoryProduct";
-import { ICategoryProductRepository } from "@modules/Product/repositories/ICategoryProductRepository";
+import { CategoryProduct } from "@modules/product/infra/typeorm/entities/CategoryProduct";
+import { ICategoryProductRepository } from "@modules/product/repositories/ICategoryProductRepository";
 import { AppError } from "@shared/Errors/AppError";
 import { inject, injectable } from "tsyringe"
 

@@ -1,5 +1,5 @@
-import { ICreateProductDTO } from "@modules/Product/dtos/ICreateProductDTO";
-import { IProductRepository } from "@modules/Product/repositories/IProductRepository";
+import { ICreateProductDTO } from "@modules/product/dtos/ICreateProductDTO";
+import { IProductRepository } from "@modules/product/repositories/IProductRepository";
 import { inject, injectable } from "tsyringe";
 
 

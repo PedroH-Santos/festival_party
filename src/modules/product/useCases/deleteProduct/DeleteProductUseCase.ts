@@ -1,4 +1,4 @@
-import { IProductRepository } from "@modules/Product/repositories/IProductRepository";
+import { IProductRepository } from "@modules/product/repositories/IProductRepository";
 import { inject, injectable } from "tsyringe";
 
 interface IRequest {

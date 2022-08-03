@@ -1,4 +1,4 @@
-import { IImageProductRepository } from "@modules/Product/repositories/IImageProductRepository";
+import { IImageProductRepository } from "@modules/product/repositories/IImageProductRepository";
 import { inject, injectable } from "tsyringe";
 
 

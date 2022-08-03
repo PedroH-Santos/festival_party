@@ -1,5 +1,5 @@
-import { Product } from "@modules/Product/infra/typeorm/entities/Product";
-import { IProductRepository } from "@modules/Product/repositories/IProductRepository";
+import { Product } from "@modules/product/infra/typeorm/entities/Product";
+import { IProductRepository } from "@modules/product/repositories/IProductRepository";
 import { AppError } from "@shared/Errors/AppError";
 import { inject, injectable } from "tsyringe"
 

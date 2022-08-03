@@ -1,4 +1,4 @@
-import { IProductRepository } from "@modules/Product/repositories/IProductRepository";
+import { IProductRepository } from "@modules/product/repositories/IProductRepository";
 import { inject, injectable } from "tsyringe";
 import { IImageProductRepository } from "../../repositories/IImageProductRepository";
 import { AppError } from "@shared/Errors/AppError";
@@ -35,10 +35,10 @@ class CreateImageProductUseCase {
         const imageExist = await this.imageProductRepository.getByIdProduct(product_id);
         if(imageExist){
             await this.imageProductRepository.delete(imageExist.id);
-            await this.storageProvider.delete(imageExist.image,"Product");
+            await this.storageProvider.delete(imageExist.image,"product");
         }        
         imagesName.map(async (image) => {
-            await this.storageProvider.save(image,'Product');
+            await this.storageProvider.save(image,'product');
             await this.imageProductRepository.create({product_id,image});
         });
     }
