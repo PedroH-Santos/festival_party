@@ -21,7 +21,7 @@ class FindProductByIdUseCase {
     async execute({id}: FiltersRequest): Promise<Product>{
         const product = await this.productRepository.getById(id);
         if(!product){
-            throw new AppError("Vestido não encontrado",500);
+            throw new AppError("Vestido não encontrado");
         }
         return product;
     }

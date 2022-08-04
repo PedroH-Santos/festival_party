@@ -23,7 +23,7 @@ class FindRentalByIdUseCase {
     async execute({id}: FiltersRequest): Promise<Rental>{
         const rental = await this.rentalRepository.getById(id);
         if(!rental){
-            throw new AppError("Aluguél não encontrado",500);
+            throw new AppError("Aluguél não encontrado");
         }
         return rental;
     }

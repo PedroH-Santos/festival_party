@@ -22,7 +22,7 @@ class FindTransactionByIdUseCase {
     async execute({id}: FiltersRequest): Promise<Transaction>{
         const transaction = await this.transactionRepository.getById(id);
         if(!transaction){
-            throw new AppError("Transação não encontrado",500);
+            throw new AppError("Transação não encontrado");
         }
         return transaction;
     }

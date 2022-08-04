@@ -22,7 +22,7 @@ class FindUserByIdUseCase {
     async execute({id}: FiltersRequest): Promise<User>{
         const user = await this.userRepository.getById(id);
         if(!user){
-            throw new AppError("Usuário não encontrado",500);
+            throw new AppError("Usuário não encontrado");
         }
         return user;
     }

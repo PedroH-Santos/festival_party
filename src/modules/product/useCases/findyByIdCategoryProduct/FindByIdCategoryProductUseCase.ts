@@ -22,7 +22,7 @@ class FindByIdCategoryProductUseCase {
     async execute({id}: FiltersRequest): Promise<CategoryProduct>{
         const category = await this.categoryProductRepository.getById(id);
         if(!category){
-            throw new AppError("Categoria não encontrada",500);
+            throw new AppError("Categoria não encontrada");
         }
         return category;
     }
