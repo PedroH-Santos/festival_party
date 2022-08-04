@@ -11,7 +11,7 @@ import { AppError } from "@shared/Errors/AppError";
 import cors from "cors";
 import rateLimiter from "./middlewares/rateLimiter";
 const app = express();
-createConnection();
+createConnection(); 
 
 Sentry.init({
     dsn: process.env.SENTRY_DNS,
