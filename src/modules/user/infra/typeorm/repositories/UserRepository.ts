@@ -9,9 +9,11 @@ import { User } from "../entities/User";
 
 class UserRepository implements IUserRepository {
     private repository: Repository<User>
+    private perPage = 10;
     constructor() {
         this.repository = getRepository(User);
     }
+
 
     async create({ id, name, email, password }: ICreateUserDTO): Promise<User> {
         const user = this.repository.create({ id, name, email, password });
@@ -23,6 +25,29 @@ class UserRepository implements IUserRepository {
         const users = await this.repository.find();
         return users;
     }
+
+    async getCountAll(search: string): Promise<number> {
+        const sql = this.repository.createQueryBuilder("users")
+        if(search != undefined){
+            sql.where("users.name like '%' || :name || '%'", {name: search })
+        }
+        const count = await sql.getCount();
+        return count;
+    }
+
+
+    async getWithPagination(page: number,search: string): Promise<User[]> {
+        const sql = await this.repository.createQueryBuilder("users")
+        .skip(this.perPage * (page - 1))
+        .take(this.perPage);
+
+        if(search != undefined){
+            sql.where("users.name like '%' || :name || '%'", {name: search })
+        }
+        const users = sql.getMany();
+        return users;
+    }
+
     async getById(id: string): Promise<User> {
         const user = await this.repository.findOne(id);
         return user;
