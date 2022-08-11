@@ -8,7 +8,8 @@ import { Rental } from "../entities/Rental";
 
 
 class RentalRepository implements IRentalRepository {
-    private repository: Repository<Rental>
+    private repository: Repository<Rental>;
+    private perPage = 10;
     constructor() {
         this.repository = getRepository(Rental);
     }
@@ -18,8 +19,8 @@ class RentalRepository implements IRentalRepository {
 
 
 
-    async create({ id, value, expected_delivery_date, product_id, user_id, description, start_date, client_id,status }: ICreateRentalDTO): Promise<Rental> {
-        const rental = this.repository.create({ id, value, expected_delivery_date, product_id, user_id, description, start_date, client_id,status });
+    async create({ id, value, expected_delivery_date, product_id, user_id, description, start_date, client_id, status }: ICreateRentalDTO): Promise<Rental> {
+        const rental = this.repository.create({ id, value, expected_delivery_date, product_id, user_id, description, start_date, client_id, status });
         await this.repository.save(rental);
         return rental;
     }
@@ -41,10 +42,10 @@ class RentalRepository implements IRentalRepository {
     }
     async getAllToday(): Promise<Rental[]> {
         const rentalQuery = await this.repository.createQueryBuilder("rentals");
-        rentalQuery.leftJoinAndSelect("rentals.user","users");
-        rentalQuery.leftJoinAndSelect("rentals.product","product");
-        rentalQuery.leftJoinAndSelect("product.images","products_images");
-        rentalQuery.leftJoinAndSelect("rentals.client","clients");
+        rentalQuery.leftJoinAndSelect("rentals.user", "users");
+        rentalQuery.leftJoinAndSelect("rentals.product", "product");
+        rentalQuery.leftJoinAndSelect("product.images", "products_images");
+        rentalQuery.leftJoinAndSelect("rentals.client", "clients");
         rentalQuery.andWhere("start_date::date =  NOW()::date");
         rentalQuery.andWhere("status =  'OPEN' ");
         const rentals = await rentalQuery.getMany();
@@ -52,21 +53,52 @@ class RentalRepository implements IRentalRepository {
         return rentals;
     }
 
+
+    async getCountAll(start_date: Date, expected_delivery_date: Date): Promise<number> {
+        const sql = this.repository.createQueryBuilder("users")
+        if (start_date != undefined) {
+            sql.andWhere(`  start_date::date  >= timestamp '${start_date}'::date`);
+        }
+        if (expected_delivery_date != undefined) {
+            sql.andWhere(`   timestamp '${expected_delivery_date}'::date <=   expected_delivery_date::date`);
+
+        }
+        const count = await sql.getCount();
+        return count;
+    }
+
+
+    async getWithPagination(page: number, start_date: Date, expected_delivery_date: Date): Promise<Rental[]> {
+        const sql = this.repository.createQueryBuilder("users")
+            .skip(this.perPage * (page - 1))
+            .take(this.perPage);
+        if (start_date != undefined) {
+            sql.andWhere(`start_date::date  >= timestamp '${start_date}'::date`);
+        }
+        if (expected_delivery_date != undefined) {
+            sql.andWhere(` expected_delivery_date::date <= timestamp '${expected_delivery_date}'::date  `);
+
+        }
+        const users = sql.getMany();
+        return users;
+    }
+
+
     async getAllFinishToday(): Promise<Rental[]> {
         const rentalQuery = await this.repository.createQueryBuilder("rentals");
-        rentalQuery.leftJoinAndSelect("rentals.user","users");
-        rentalQuery.leftJoinAndSelect("rentals.product","product");
-        rentalQuery.leftJoinAndSelect("product.images","products_images");
-        rentalQuery.leftJoinAndSelect("rentals.client","clients");
+        rentalQuery.leftJoinAndSelect("rentals.user", "users");
+        rentalQuery.leftJoinAndSelect("rentals.product", "product");
+        rentalQuery.leftJoinAndSelect("product.images", "products_images");
+        rentalQuery.leftJoinAndSelect("rentals.client", "clients");
         rentalQuery.andWhere("expected_delivery_date::date <=  NOW()::date");
         rentalQuery.andWhere("status =  'PROGRESS' ");
         const rentals = await rentalQuery.getMany();
 
-        return rentals; 
+        return rentals;
     }
     async getById(id: string): Promise<Rental> {
         const rental = await this.repository.findOne({
-            relations: ['user', 'product', 'client', 'product.category', 'product.images','transactions'],
+            relations: ['user', 'product', 'client', 'product.category', 'product.images', 'transactions'],
             where: { id }
         });
         return rental;

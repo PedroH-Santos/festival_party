@@ -10,6 +10,7 @@ import { ListRentalFinishTodayController } from "@modules/rental/useCases/listRe
 
 
 import {Router} from  "express";
+import { ListRentalWithPaginationController } from "@modules/rental/useCases/listRentalWithPagination/ListRentalWithPaginationController";
 
  
 const rentalRouter = Router();
@@ -22,9 +23,12 @@ const listRentalByIdProductController = new ListRentalByIdProductController();
 const findRentalByIdController = new FindRentalByIdController();
 const listRentalTodayController = new ListRentalTodayController();
 const listRentalFinishTodayController = new ListRentalFinishTodayController();
+const listRentalWithPaginationController = new ListRentalWithPaginationController();
 
 rentalRouter.post("/",createRentalController.handle);
 rentalRouter.get("/",listRentalController.handle);
+rentalRouter.get("/pagination",listRentalWithPaginationController.handle);
+
 rentalRouter.get("/filter",listRentalByIdProductController.handle);
 rentalRouter.get("/detail/:id",findRentalByIdController.handle);
 rentalRouter.get("/today",listRentalTodayController.handle);
