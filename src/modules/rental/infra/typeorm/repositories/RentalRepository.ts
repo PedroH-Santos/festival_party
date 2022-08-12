@@ -56,11 +56,11 @@ class RentalRepository implements IRentalRepository {
 
     async getCountAll(start_date: Date, expected_delivery_date: Date): Promise<number> {
         const sql = this.repository.createQueryBuilder("users")
-        if (start_date != undefined) {
-            sql.andWhere(`  start_date::date  >= timestamp '${start_date}'::date`);
+        if (start_date != undefined ) {
+            sql.andWhere(`start_date::date  >= timestamp '${start_date}'::date`);
         }
-        if (expected_delivery_date != undefined) {
-            sql.andWhere(`   timestamp '${expected_delivery_date}'::date <=   expected_delivery_date::date`);
+        if (expected_delivery_date != undefined ) {
+            sql.andWhere(` expected_delivery_date::date <= timestamp '${expected_delivery_date}'::date  `);
 
         }
         const count = await sql.getCount();
@@ -69,18 +69,22 @@ class RentalRepository implements IRentalRepository {
 
 
     async getWithPagination(page: number, start_date: Date, expected_delivery_date: Date): Promise<Rental[]> {
-        const sql = this.repository.createQueryBuilder("users")
+        const sql = this.repository.createQueryBuilder("rentals")
             .skip(this.perPage * (page - 1))
             .take(this.perPage);
-        if (start_date != undefined) {
+        if (start_date != undefined ) {
             sql.andWhere(`start_date::date  >= timestamp '${start_date}'::date`);
         }
-        if (expected_delivery_date != undefined) {
+        if (expected_delivery_date != undefined ) {
             sql.andWhere(` expected_delivery_date::date <= timestamp '${expected_delivery_date}'::date  `);
 
         }
-        const users = sql.getMany();
-        return users;
+        sql.leftJoinAndSelect("rentals.user", "users");
+        sql.leftJoinAndSelect("rentals.product", "product");
+        sql.leftJoinAndSelect("product.images", "products_images");
+        sql.leftJoinAndSelect("rentals.client", "clients");
+        const rentals = sql.getMany();
+        return rentals;
     }
 
 
