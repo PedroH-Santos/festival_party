@@ -9,6 +9,8 @@ import { Product } from "../entities/Product";
 
 class ProductRepository implements IProductRepository{
     private repository: Repository<Product>; 
+    private perPage = 10;
+
     constructor(){
         this.repository = getRepository(Product);
     }
@@ -28,6 +30,32 @@ class ProductRepository implements IProductRepository{
         });
         return products;
     }
+
+    async getCountAll(search: string): Promise<number> {
+        const sql = this.repository.createQueryBuilder("products")
+        if(search != undefined){
+            sql.where("products.name like '%' || :name || '%'", {name: search })
+        }
+        const count = await sql.getCount();
+        return count;
+    }
+
+
+    async getWithPagination(page: number,search: string): Promise<Product[]> {
+        const sql = this.repository.createQueryBuilder("products")
+        .skip(this.perPage * (page - 1))
+        .take(this.perPage)
+        .leftJoinAndSelect("products.images","products_images")
+        .leftJoinAndSelect("products.category","products_categorys");
+
+        if(search != undefined){
+            sql.where("products.name like '%' || :name || '%'", {name: search })
+        }
+        const products = sql.getMany();
+        return products;
+    }
+
+
     async getById(id: string): Promise<Product> {
         const product = await this.repository.findOne(id,{
             relations: ["category","images"]

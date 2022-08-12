@@ -14,6 +14,9 @@ interface IRentalRepository {
     getAllToday(): Promise<Rental[]>;
     getAllFinishToday(): Promise<Rental[]>;
     getByProductId(product_id: string): Promise<Rental[]>;
+    getCountAll(start_date: Date,expected_delivery_date: Date): Promise<number>;
+    getWithPagination(page: number, start_date: Date,expected_delivery_date: Date): Promise<Rental[]>;
+
     delete(id: string): Promise<void>;
     updateFinish(id: string,end_date: Date): Promise<void>;
 

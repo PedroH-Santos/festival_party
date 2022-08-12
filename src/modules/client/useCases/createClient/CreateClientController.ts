@@ -10,7 +10,6 @@ class CreateClientController{
         const {id,name,email,phone} = request.body;
         const createClientUseCase = container.resolve(CreateClientUseCase);
         const client = createClientUseCase.execute({id,name,email,phone});
-        console.log(client);
         return response.status(201).json(client);
     }
 }

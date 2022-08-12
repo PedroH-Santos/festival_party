@@ -5,6 +5,7 @@ import { DeleteTransactionController } from "@modules/transaction/useCases/delet
 import { FindTransactionByIdController } from "@modules/transaction/useCases/findTransactionById/FindTransactionByIdController";
 
 import {Router} from  "express";
+import { ListTransactionWithPaginationController } from "@modules/transaction/useCases/listTransactionWithPagination/ListTransactionWithPaginationController";
 
 
 const transactionRoutes = Router();
@@ -14,8 +15,11 @@ const listTransactionController = new ListTransactionController();
 const deleteTransactionController = new DeleteTransactionController();
 const findTransactionByIdController = new FindTransactionByIdController();
 
+const listTransactionWithPaginationController = new ListTransactionWithPaginationController();
+
 transactionRoutes.post("/",createTransactionController.handle);
 transactionRoutes.get("/",listTransactionController.handle);
+transactionRoutes.get("/pagination",listTransactionWithPaginationController.handle);
 transactionRoutes.get("/detail/:id",findTransactionByIdController.handle);
 transactionRoutes.delete("/:id",deleteTransactionController.handle); 
 

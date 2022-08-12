@@ -9,7 +9,9 @@ import { ICreateTransactionDTO } from "../../../dtos/ICreateTransactionDTO";
 
 
 class TransactionRepository implements ITransactionRepository {
-    private repository: Repository<Transaction>
+    private repository: Repository<Transaction>;
+    private perPage = 10;
+
     constructor() {
         this.repository = getRepository(Transaction);
     }
@@ -25,6 +27,29 @@ class TransactionRepository implements ITransactionRepository {
         const transactions = this.repository.find();
         return transactions;
     }
+
+    async getCountAll(search: string): Promise<number> {
+        const sql = this.repository.createQueryBuilder("transactions")
+        if(search != undefined){
+            sql.where("transactions.origin like '%' || :origin || '%'", {origin: search })
+        }
+        const count = await sql.getCount();
+        return count;
+    }
+
+
+    async getWithPagination(page: number,search: string): Promise<Transaction[]> {
+        const sql = await this.repository.createQueryBuilder("transactions")
+        .skip(this.perPage * (page - 1))
+        .take(this.perPage);
+
+        if(search != undefined){
+            sql.where("transactions.origin like '%' || :origin || '%'", {origin: search })
+        }
+        const users = sql.getMany();
+        return users;
+    }
+
 
     async getById(id: string): Promise<Transaction> {
         const transaction = this.repository.findOne(id);
